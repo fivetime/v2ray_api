@@ -5,7 +5,7 @@
 1. 下载
 
    ```bash
-   git clone https://github.com/spencer404/v2ray-api.git
+   git clone https://github.com/fivetime/v2ray-api.git
    ```
 
 2. 安装依赖
@@ -19,7 +19,7 @@
    ```bash
    cd v2ray-api
    # 下载v2ray-core源码
-   git clone https://github.com/v2ray/v2ray-core.git
+   git clone https://github.com/v2fly/v2ray-core.git
    # 清空旧的v2ray目录
    rm -rf v2ray
    mkdir v2ray

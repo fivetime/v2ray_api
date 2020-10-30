@@ -7,7 +7,7 @@ import argparse
 import distutils.dir_util
 
 
-def walk(src, dst):
+def walk_for_old(src, dst):
     # 导入路径类似'v2ray.com/core/common/serial/typed_message.proto'
     # 需整理好目录树
     tmp_dir = tempfile.mkdtemp()
@@ -38,6 +38,27 @@ def walk(src, dst):
     return result
 
 
+def walk_for_new(src, dst):
+    # 扫描proto文件
+    proto_files = ''
+    for root, dirs, files in os.walk(src):
+        for file in files:
+            if file.endswith(".proto"):
+                proto_files += ' ' + os.path.join(root, file)
+    if not proto_files:
+        raise FileNotFoundError("未找到任何proto文件")
+
+    # 编译
+    out_dir = 'v2ray' if dst.endswith('/') else '/v2ray'
+    out_dir = dst+out_dir+'/com/core'; os.makedirs(out_dir)
+    command = f'{sys.executable} -m grpc.tools.protoc ' \
+              f'-I={src} ' \
+              f'--python_out={out_dir} ' \
+              f'--grpc_python_out={out_dir} ' + proto_files
+    result = os.system(command)
+    return result
+
+
 def main():
     # 解析参数
     node = argparse.ArgumentParser()
@@ -51,7 +72,7 @@ def main():
     if not os.path.exists(options.dst):
         raise FileNotFoundError(f"输出'{options.src}'不存在")
 
-    return walk(options.src, options.dst)
+    return walk_for_new(options.src, options.dst)
 
 
 if __name__ == '__main__':
