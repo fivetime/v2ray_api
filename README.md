@@ -5,7 +5,7 @@
 1. 下载
 
    ```bash
-   git clone https://github.com/fivetime/v2ray-api.git
+   git clone https://github.com/fivetime/v2ray_api.git
    ```
 
 2. 安装依赖
