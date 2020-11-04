@@ -17,7 +17,7 @@
 3. 编译proto到v2ray目录（此步可忽略，默认为v3.41）
 
    ```bash
-   cd v2ray-api
+   cd v2ray_api
    # 下载v2ray-core源码
    git clone https://github.com/v2fly/v2ray-core.git
    # 清空旧的v2ray目录
